@@ -1,24 +1,25 @@
 # 🎵 Music Mood Classification Using Machine Learning
 
-An AI-powered music emotion classification system that analyzes an uploaded MP3 file and predicts its emotional characteristics using machine learning.
+An AI-powered web application that analyzes an uploaded music file and predicts its emotional characteristics using Machine Learning and audio signal processing.
 
-## 📌 Project Overview
+The system extracts meaningful audio features such as MFCCs, Chroma, Spectral Centroid, Zero Crossing Rate, RMS Energy and Tempo, and uses them to estimate multiple emotional dimensions of music.
 
-Music can express multiple emotions at the same time. This project uses audio signal processing and machine learning to analyze music and estimate nine different emotional dimensions from an audio file.
-
-The system extracts meaningful audio features from the uploaded music and uses a trained Random Forest model to generate emotion scores.
+---
 
 ## 🎯 Objectives
 
-- Analyze music using audio signal processing
-- Extract meaningful audio features
-- Predict multiple emotional dimensions
-- Display emotion scores in an easy-to-understand interface
-- Build a practical machine learning application using Flask
+- Analyze emotional characteristics present in music.
+- Extract meaningful features from audio files.
+- Apply Machine Learning techniques for emotion prediction.
+- Predict multiple emotional dimensions from a single audio file.
+- Provide an easy-to-use web interface for music analysis.
+- Present prediction results through visual emotion scores.
 
-## 🧠 Emotions Predicted
+---
 
-The system predicts scores for:
+## 🧠 Emotions Analyzed
+
+The system analyzes the following nine emotional dimensions:
 
 - Amazement
 - Solemnity
@@ -30,49 +31,54 @@ The system predicts scores for:
 - Tension
 - Sadness
 
-## ⚙️ Technologies Used
+---
 
-### Programming
-- Python
+## 🎧 Audio Features
 
-### Machine Learning
-- Scikit-learn
+The system extracts several audio characteristics using Librosa:
+
+| Feature | Description |
+|---|---|
+| MFCC | Represents the spectral characteristics of audio |
+| Chroma | Represents pitch-class information |
+| Spectral Centroid | Indicates the brightness of an audio signal |
+| Zero Crossing Rate | Measures signal sign changes |
+| RMS Energy | Represents signal energy |
+| Tempo | Represents the estimated beats per minute |
+
+These features are converted into numerical values and provided to the Machine Learning model.
+
+---
+
+## 🤖 Machine Learning
+
+The project experiments with multiple Machine Learning approaches:
+
+- Linear Regression
 - Random Forest
 - XGBoost
-- Linear Regression
 
-### Audio Processing
-- Librosa
-- NumPy
+The task is treated as a **multi-output regression problem**, where the model predicts continuous scores for the nine emotional dimensions.
 
-### Data Processing
-- Pandas
+### Cross-Validation Results
 
-### Web Application
-- Flask
-- HTML
-- CSS
-- JavaScript
+The models were evaluated using 5-fold cross-validation.
 
-## 🎵 Audio Features
+| Model | Average MAE | Average MSE | Average R² |
+|---|---:|---:|---:|
+| Random Forest | 0.1247 | 0.0245 | 0.1888 |
+| XGBoost | 0.1223 | 0.0245 | 0.1769 |
 
-The system extracts several features from the uploaded audio:
+The current implementation uses the Random Forest model for the web application.
 
-- Tempo
-- MFCC
-- Chroma Features
-- Spectral Centroid
-- Zero Crossing Rate
-- RMS Energy
-
-These features are used as inputs to the machine learning model.
+---
 
 ## 🔄 Project Workflow
 
 ```text
-MP3 Audio
+Audio File
     ↓
-Audio Loading
+Audio Preprocessing
     ↓
 Feature Extraction
     ↓
@@ -80,8 +86,8 @@ MFCC + Chroma + Spectral Features
     ↓
 Machine Learning Model
     ↓
-Emotion Prediction
+Multi-Output Emotion Prediction
     ↓
 Emotion Scores
     ↓
-Web Interface
+Web Application
