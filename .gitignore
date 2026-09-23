@@ -1,3 +1,4 @@
+@"
 venv/
 __pycache__/
 uploads/
@@ -9,7 +10,31 @@ features/
 models/
 
 .ipynb_checkpoints/
+
 classical/
 rock/
 electronic/
 pop/
+
+analyze_thresholds.py
+check_audio_files.py
+check_correlation.py
+check_emotion_distribution.py
+check_emotion_labels.py
+check_labels.py
+check_mood_preferences.py
+check_moods.py
+check_track_mapping.py
+compare_models.py
+evaluate_model.py
+find_emotion_thresholds.py
+inspect_mood_emotions.py
+inspect_mood_values.py
+make_final_dataset.py
+model_comparison.py
+predict_mood.py
+prepare_dataset.py
+track_emotion_profile.py
+track_mood_check.py
+train_audio_model.py
+"@ | Set-Content .gitignore
