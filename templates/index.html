@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Music Mood Classification</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>🎵 Music Mood Classification</h1>
+
+        <p>
+            AI-powered music emotion analysis using Machine Learning
+        </p>
+
+    </div>
+
+
+    <div class="upload-box">
+
+        <h2>Upload Your Music</h2>
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            id="uploadForm"
+        >
+
+            <input
+                type="file"
+                name="audio"
+                accept=".mp3"
+                required
+                id="audioInput"
+            >
+
+            <br>
+
+            <p
+                class="selected-file"
+                id="selectedFile"
+            ></p>
+
+            <button
+                type="submit"
+                id="predictButton"
+            >
+                Predict Mood
+            </button>
+
+        </form>
+
+    </div>
+
+
+    {% if results %}
+
+    <div class="results">
+
+        <div class="top-emotion">
+
+            <p>Dominant Emotion</p>
+
+            <h2>
+                {{ results[0][0].replace("_", " ") }}
+            </h2>
+
+            <span>
+                {{ "%.0f"|format(results[0][1] * 100) }}%
+            </span>
+
+        </div>
+
+
+        <h2>
+            🎧 Emotion Analysis
+        </h2>
+
+
+        {% for emotion, score in results %}
+
+        <div class="emotion">
+
+            <div class="emotion-name">
+
+                <span>
+                    {{ emotion.replace("_", " ") }}
+                </span>
+
+                <span>
+                    {{ "%.0f"|format(score * 100) }}%
+                </span>
+
+            </div>
+
+
+            <div class="bar">
+
+                <div
+                    class="fill"
+                    style="width: {{ (score * 100)|round }}%"
+                ></div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+        <div class="interpretation">
+
+            <h2>
+                🧠 AI Interpretation
+            </h2>
+
+            <p>
+                The uploaded music shows a dominant emotional response of
+                <strong>
+                    {{ results[0][0].replace("_", " ") }}
+                </strong>
+                with a predicted score of
+                <strong>
+                    {{ "%.0f"|format(results[0][1] * 100) }}%
+                </strong>.
+            </p>
+
+            <p>
+                The model analyzes audio characteristics such as
+                MFCCs, chroma features, spectral properties,
+                zero-crossing rate, RMS energy and tempo.
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+
+<script>
+
+const audioInput = document.getElementById("audioInput");
+
+const selectedFile = document.getElementById("selectedFile");
+
+const uploadForm = document.getElementById("uploadForm");
+
+const predictButton = document.getElementById("predictButton");
+
+
+audioInput.addEventListener("change", function () {
+
+    if (this.files.length > 0) {
+
+        selectedFile.innerHTML =
+            "🎵 Selected: <strong>" +
+            this.files[0].name +
+            "</strong>";
+
+    } else {
+
+        selectedFile.innerHTML = "";
+
+    }
+
+});
+
+
+uploadForm.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    predictButton.innerHTML = "⏳ Analyzing Music...";
+
+    predictButton.disabled = true;
+
+    setTimeout(function () {
+
+        uploadForm.submit();
+
+    }, 1000);
+
+});
+
+</script>
+
+
+</body>
+
+</html>

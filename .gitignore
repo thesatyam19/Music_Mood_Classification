@@ -1,0 +1,15 @@
+venv/
+__pycache__/
+uploads/
+*.pyc
+
+data.csv
+
+features/
+models/
+
+.ipynb_checkpoints/
+classical/
+rock/
+electronic/
+pop/
